@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './AllProducts.css'
 import Product from '../Product/Product';
+import Cart from '../../Cart/Cart'
 
 const AllProducts = () => {
     const [products, setProducts] = useState([])
@@ -9,8 +10,8 @@ const AllProducts = () => {
 
     // handle button 
 
-    const handleAddProduct = (product) => {
-        const newCart = [...cart, product]
+    const handleAddToCart = (product) => {
+        const newCart = [...cart, product];
         setCart(newCart);
     }
     useEffect(() => {
@@ -23,13 +24,20 @@ const AllProducts = () => {
 
 
             <div className="row">
-                {
-                    products.map(product => <Product
-                        key={product.id}
-                        product={product}
-                        handleAddProduct={handleAddProduct}
-                    ></Product>)
-                }
+                <div className="col-lg-8">
+                    {
+                        products.map(product => <Product
+                            key={product.id}
+                            product={product}
+                            handleAddToCart={handleAddToCart}
+                        ></Product>)
+                    }
+                </div>
+                <div className="col-lg-4">
+                    <Cart
+                        cart={cart}
+                    ></Cart>
+                </div>
             </div>
 
         </div >
